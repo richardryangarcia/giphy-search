@@ -17,7 +17,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 
 import Router from './router';
 import reducers from './redux/reducers';
-// import sagas from './redux/sagas';
+import sagas from './redux/sagas';
 
 // create store with middlewares
 const history = createHashHistory();
@@ -26,7 +26,7 @@ const routeMiddleware = routerMiddleware(history);
 const middlewares = [sagaMiddleware, routeMiddleware];
 const store = createStore(reducers(history), composeWithDevTools(applyMiddleware(...middlewares)));
 
-// sagaMiddleware.run(sagas)
+sagaMiddleware.run(sagas)
 
 ReactDOM.render(
   <Provider store={store}>

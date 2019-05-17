@@ -1,23 +1,26 @@
 import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//to be moved
+import RegisterForm from './registerForm';
+import LoginForm from './loginForm';
+
+class App extends React.Component {
+  componentDidMount(){
+    console.log('fetch data');
+  }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>
+            Homepage
+          </p>
+        </header>
+        {/* <RegisterForm/> */}
+        <LoginForm/>
+      </div>
+    );
+  }
 }
 
 export default App;
