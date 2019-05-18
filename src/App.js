@@ -1,11 +1,11 @@
 import React from 'react';
-
-//to be moved
-import RegisterForm from './registerForm';
-import LoginForm from './loginForm';
+import {connect} from 'react-redux';
+import {GET_TRENDING} from './redux/trending/actions';
 
 class App extends React.Component {
   componentDidMount(){
+    const {dispatch} = this.props;
+    dispatch({type:GET_TRENDING});
     console.log('fetch data');
   }
   render() {
@@ -16,11 +16,15 @@ class App extends React.Component {
             Homepage
           </p>
         </header>
-        {/* <RegisterForm/> */}
-        <LoginForm/>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    trending: state.trending
+  }
+}
+
+export default connect(mapStateToProps, null)(App);
