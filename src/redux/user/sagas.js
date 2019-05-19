@@ -37,7 +37,7 @@ export function* register({payload}){
     //call server to create a user record in mongodb with newly generated firebase id
     const response = yield call(createMongoUser, user.uid, firstName, lastName, email);
 
-    //if mongo user created, then mark firebase record as verified.
+    //if mongo user created, then update firebase first name and last name.
     if(response && response.message === 'User successfully created'){
       //update firebase record to include first and last name
       yield call(fbUpdateName, user, firstName, lastName);

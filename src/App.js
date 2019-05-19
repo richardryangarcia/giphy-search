@@ -1,9 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {GET_TRENDING} from './redux/trending/actions';
-import RegisterForm from './registerForm';
+import {LOGOUT} from './redux/user/actions';
 
 class App extends React.Component {
+
+  handleLogout = (e) => {
+    e.preventDefault();
+    const {dispatch} = this.props;
+    dispatch({type:LOGOUT});
+  }
+
   componentDidMount(){
     const {dispatch} = this.props;
     dispatch({type:GET_TRENDING});
@@ -16,7 +23,8 @@ class App extends React.Component {
             Homepage
           </p>
         </header>
-        <RegisterForm />
+
+        <button onClick={this.handleLogout}>Logout</button>
       </div>
     );
   }
