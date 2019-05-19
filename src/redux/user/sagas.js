@@ -1,6 +1,7 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
 import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE} from './actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
+import {createMongoUser} from '../../services/authentication';
 
 export function* login({payload}){
   const {email, password} = payload;
@@ -28,14 +29,24 @@ export function* register({payload}){
     }
   })
 
+  //create user record in firebase
   const user = yield call(fbRegister, email, password);
+
   if (user) {
-    yield call(fbUpdateName, user, firstName, lastName);
-    yield call(register, firstName, lastName, email);
-    yield put({
-      type: LOAD_CURRENT_USER,
-    });
+
+    //call server to create a user record in mongodb with newly generated firebase id
+    const response = yield call(createMongoUser, user.uid, firstName, lastName, email);
+
+    //if mongo user created, then mark firebase record as verified.
+    if(response && response.message === 'User successfully created'){
+      //update firebase record to include first and last name
+      yield call(fbUpdateName, user, firstName, lastName);
+    }
   }
+
+  yield put({
+    type: LOAD_CURRENT_USER,
+  });
 }
 
 export function* logout(){
@@ -54,6 +65,7 @@ export function* logout(){
 }
 
 export function* loadCurrentUser(){
+  window.localStorage.removeItem('hebCodeChallenge.accessToken');
   yield put({
     type: SET_STATE,
     payload: {
@@ -62,8 +74,9 @@ export function* loadCurrentUser(){
   });
 
   const response = yield call(fbCurrentUser);
-  if (response) {
+  if (response && response.uid) {
     const {uid, displayName, email} = response;
+
     window.localStorage.setItem('hebCodeChallenge.accessToken', response.ra)
     yield put({
       type: SET_STATE,
@@ -75,6 +88,10 @@ export function* loadCurrentUser(){
         loading: false
       }
     });
+  } else {
+    yield put({
+      type: LOGOUT
+    });
   }
 }
 
@@ -83,6 +100,7 @@ export default function* rootSaga(){
     takeEvery(LOGIN, login ),
     takeEvery(REGISTER, register),
     takeEvery(LOGOUT, logout),
-    takeEvery(LOAD_CURRENT_USER, loadCurrentUser)
+    takeEvery(LOAD_CURRENT_USER, loadCurrentUser),
+    loadCurrentUser()//run once on app load
   ])
 }

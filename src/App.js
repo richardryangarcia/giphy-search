@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {GET_TRENDING} from './redux/trending/actions';
+import RegisterForm from './registerForm';
 
 class App extends React.Component {
   componentDidMount(){
     const {dispatch} = this.props;
     dispatch({type:GET_TRENDING});
-    console.log('fetch data');
   }
   render() {
     return (
@@ -16,6 +16,7 @@ class App extends React.Component {
             Homepage
           </p>
         </header>
+        <RegisterForm />
       </div>
     );
   }
