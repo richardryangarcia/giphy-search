@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {GET_TRENDING} from './redux/trending/actions';
 import {LOGOUT} from './redux/user/actions';
+import MenuTop from './components/MenuTop';
+import ModalContainer from './components/Modal';
 
 class App extends React.Component {
 
@@ -18,13 +20,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <MenuTop />
         <header className="App-header">
           <p>
             Homepage
           </p>
         </header>
-
-        <button onClick={this.handleLogout}>Logout</button>
+        <ModalContainer/>
       </div>
     );
   }

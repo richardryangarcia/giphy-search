@@ -3,11 +3,13 @@ import {connectRouter} from 'connected-react-router';
 import {reducer as formReducer} from 'redux-form';
 import userReducer from './user/reducers';
 import trendingReducer from './trending/reducers';
+import applicationReducer from './application/reducers';
 
 export default history =>
   combineReducers({
-    router: connectRouter(history),
+    application: applicationReducer,
     form: formReducer,
-    user: userReducer,
-    trending: trendingReducer
+    router: connectRouter(history),
+    trending: trendingReducer,
+    user: userReducer
   })
