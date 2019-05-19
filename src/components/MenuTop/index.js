@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
 import Logo from './logo.svg';
 import {OPEN_MODAL} from '../../redux/application/actions';
+import {LOGOUT} from '../../redux/user/actions';
 
 class MenuBar extends React.Component {
   openLoginModal = (e) => {
@@ -28,12 +29,20 @@ class MenuBar extends React.Component {
     });
   }
 
+  userLogout = (e) => {
+    const {dispatch} = this.props;
+    e.preventDefault();
+    dispatch({
+      type: LOGOUT
+    });
+  }
+
   authNavLinks = () => {
     const {user} = this.props;
     if (user.authorized){
       return [
         <Nav.Link href="#">Favorites</Nav.Link>,
-        <Nav.Link href="#">Logout</Nav.Link>
+        <Nav.Link href="#" onClick={this.userLogout}>Logout</Nav.Link>
       ]
     } else {
       return [

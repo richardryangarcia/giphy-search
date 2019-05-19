@@ -39,7 +39,7 @@ class ModalContainer extends React.Component  {
       case 'login':
         return <LoginContents changeModal={this.changeToRegisterContents}/>
       case 'register':
-        return <RegisterContents changeModal={this.changeToLoginContents} />
+        return <RegisterContents changeModal={this.changeToLoginContents}/>
       default:
         return null
     }
