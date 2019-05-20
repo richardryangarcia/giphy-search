@@ -5,6 +5,7 @@ import {LOGOUT} from './redux/user/actions';
 import MenuTop from './components/MenuTop';
 import ModalContainer from './components/Modal';
 import GifCard from './components/Card';
+var GifPlayer = require('react-gif-player');
 
 class App extends React.Component {
 
@@ -21,7 +22,9 @@ class App extends React.Component {
   render() {
     const {trending} = this.props;
     const gifs = trending ? trending.gifs : null;
-    const gif = gifs ? gifs[0] : null;
+    const gif_id = gifs && gifs[0] && gifs[0].id;
+    const still_url = trending && trending.gifs && trending.gifs[0] && trending.gifs[0].images && trending.gifs[0].images.original_still && trending.gifs[0].images.original_still.url
+    // console.log(gif.images.original_still.url)
     return (
       <div className="App">
         <MenuTop />
@@ -30,10 +33,7 @@ class App extends React.Component {
             Homepage
           </p>
         </header>
-        <img src ="https://media.giphy.com/media/3ohzdUi5U8LBb4GD4s/200w_s.gif" />
-        <img src ={encodeURI("https://media.giphy.com/media/3ohzdUi5U8LBb4GD4s/200w_s.gif")} />
-
-        <GifCard source={gif ? `https://media.giphy.com/media/${gif.id}/200w_s.gif` : ''} />
+        <GifCard still={still_url} gif={`https://media.giphy.com/media/${gif_id}/giphy.gif`} />
         <ModalContainer/>
       </div>
     );

@@ -1,13 +1,14 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import GifPlayer from 'react-gif-player';
 
 class GifCard extends React.Component {
   render() {
     console.log(this.props.source);
     return (
       <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={this.props.source} style={{height:'100px'}} />
+        <GifPlayer variant="top" style={{height:'200px', width:'100%'}} autoplay={true} gif={this.props.gif} still={this.props.still} />
         <Card.Body>
           <Card.Title>Card Title</Card.Title>
           <Card.Text>
