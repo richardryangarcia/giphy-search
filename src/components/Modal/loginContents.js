@@ -13,8 +13,7 @@ const LoginContents = (props) => {
       </Modal.Header>
       <Modal.Body>
         <h4>Welcome Back</h4>
-        <LoginForm />
-        <a href='#' onClick={props.changeModal}>Register</a>
+        <LoginForm changeModal={props.changeModal} />
       </Modal.Body>
       <Modal.Footer>
         {/* <Button onClick={props.onHide}>Close</Button> */}

@@ -1,6 +1,5 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
-import {SET_MODAL_TYPE} from '../../redux/application/actions';
 import PropTypes from 'prop-types';
 import RegisterForm from '../Form/registerForm';
 
@@ -14,7 +13,7 @@ const RegisterContents = (props) => {
       </Modal.Header>
       <Modal.Body>
         <h4>Welcome</h4>
-        <RegisterForm />
+        <RegisterForm changeModal={props.changeModal}/>
       </Modal.Body>
       <Modal.Footer>
         {/* Already have an account? <a href='#' onClick={props.changeModal}>{' '}Login</a> */}

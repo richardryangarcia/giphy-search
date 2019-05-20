@@ -1,5 +1,6 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
 import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE} from './actions';
+import {CLOSE_MODAL} from '../application/actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
 import {createMongoUser} from '../../services/authentication';
 
@@ -16,7 +17,10 @@ export function* login({payload}){
   if (response) {
     yield put({
       type: LOAD_CURRENT_USER
-    })
+    });
+    yield put({
+      type: CLOSE_MODAL
+    });
   }
 }
 
@@ -41,6 +45,10 @@ export function* register({payload}){
     if(response && response.message === 'User successfully created'){
       //update firebase record to include first and last name
       yield call(fbUpdateName, user, firstName, lastName);
+
+      yield put({
+        type: CLOSE_MODAL
+      });
     }
   }
 

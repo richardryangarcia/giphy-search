@@ -17,7 +17,7 @@ class RegisterForm extends React.Component {
   }
 
   render(){
-    const {form, handleSubmit} = this.props;
+    const {form, handleSubmit, changeModal} = this.props;
     return (
       <Form onSubmit={handleSubmit(this.onSubmit)}>
         <Form.Group controlId="firstName">
@@ -70,7 +70,7 @@ class RegisterForm extends React.Component {
                 className='form-control'
               />
         </Form.Group>
-        <p>Already have an account?{' '}LOGIN</p>
+        <p>Already have an account?{' '}<a href="#" onClick={changeModal}>Log in</a></p>
         <Button variant="primary" type="submit" disabled={false} style={{float: 'right'}}>
           Sign Up
         </Button>

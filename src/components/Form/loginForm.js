@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
   }
 
   render(){
-    const {form, handleSubmit} = this.props;
+    const {form, handleSubmit, changeModal} = this.props;
     return (
       <Form onSubmit={handleSubmit(this.onSubmit)}>
         <Form.Group controlId="email">
@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
                 className='form-control'
               />
         </Form.Group>
-        <p>Dont have an account?{' '}REGISTER</p>
+        <p>Dont have an account?{' '}<a href="#" onClick={changeModal}>Register</a></p>
         <Button variant="primary" type="submit" disabled={false} style={{float: 'right'}}>
           Log in
         </Button>
