@@ -7,25 +7,15 @@ import ModalContainer from './components/Modal';
 import CardGrid from './components/CardGrid';
 import SearchOverlay from './components/SearchOverlay';
 
-class App extends React.Component {
-
-  handleLogout = (e) => {
-    e.preventDefault();
-    const {dispatch} = this.props;
-    dispatch({type:LOGOUT});
-  }
-
-  componentDidMount(){
-    const {dispatch} = this.props;
-    dispatch({type:GET_TRENDING});
-  }
+class SearchResults extends React.Component {
   render() {
-    const {trending} = this.props;
-    const gifs = trending ? trending.gifs : [];
+    const {search} = this.props;
+    const gifs = search ? search.gifs : [];
+    const keyword = search ? search.keyword : '';
     return (
       <div className="App" style={{'marginTop':'30px'}}>
         <MenuTop />
-        <CardGrid gifs={gifs} headline={'Trending'} subHeadline={'Find out whats trending in the gif universe'} />
+        <CardGrid gifs={gifs} headline={'Search Results'} subHeadline={`Keyword: ${keyword}`} />
         <SearchOverlay/>
         <ModalContainer/>
       </div>
@@ -35,8 +25,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    trending: state.trending
+    search: state.search
   }
 }
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, null)(SearchResults);

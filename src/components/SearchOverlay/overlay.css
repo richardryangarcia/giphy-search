@@ -1,0 +1,15 @@
+.menu {
+  z-index: 5000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #333A40;
+  overflow: hidden;
+  opacity: 0;
+  height: 0vh;
+  transition: all 1s ease-in-out; }
+  .menu.open {
+    opacity: .95;
+    height: 100vh; }

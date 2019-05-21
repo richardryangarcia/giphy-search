@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Logo from './logo.svg';
 import {OPEN_MODAL} from '../../redux/application/actions';
 import {LOGOUT} from '../../redux/user/actions';
+import {OPEN_SEARCH} from '../../redux/search/actions';
 
 class MenuBar extends React.Component {
   openLoginModal = (e) => {
@@ -26,6 +27,14 @@ class MenuBar extends React.Component {
       payload: {
         modalType: 'register'
       }
+    });
+  }
+
+  openSearch = (e) => {
+    const {dispatch} = this.props;
+    e.preventDefault();
+    dispatch({
+      type: OPEN_SEARCH
     });
   }
 
@@ -55,7 +64,7 @@ class MenuBar extends React.Component {
   render() {
     const {user} = this.props;
     return (
-      <Navbar fixed="top" bg="dark" variant="dark">
+      <Navbar fixed="top" bg="dark" variant="dark" >
         <Navbar.Brand href="/home">
           <img
             alt="project logo"
@@ -68,7 +77,7 @@ class MenuBar extends React.Component {
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Nav >
-            <Nav.Link href="#">Search</Nav.Link>
+            <Nav.Link href="#" onClick={this.openSearch}>Search</Nav.Link>
             {this.authNavLinks().map(link => {
               return link
             })}

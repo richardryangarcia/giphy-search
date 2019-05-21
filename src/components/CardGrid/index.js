@@ -11,7 +11,6 @@ const groupBy = (colCount, array) => {
 
     //loop through array
     for (let i = 0; i < array.length; i++){
-      console.log('trending images', i);
       if (rowElements.length < 3) {
         rowElements.push(array[i]);
       } else {
@@ -30,18 +29,18 @@ const CardGrid = (props) => {
   return (
     <div className='card-grid' >
       <Container>
-        <Jumbotron style={{backgroundColor: '#ffffff', padding: '25px 0px 10px 0px', marginBottom: '0px'}}>
+        <Jumbotron style={{backgroundColor: '#ffffff', padding: '45px 0px 10px 0px', marginBottom: '0px'}}>
           <h1>{props.headline}</h1>
           <p>
             {props.subHeadline}
           </p>
         </Jumbotron>
         <hr/>
-        <div style={{marginTop: '40px'}}>
+        <div style={{marginTop: '30px'}}>
         {
           groupedGifs.map((gifGroup) => {
             return (
-              <Row >
+              <Row className='justify-content-center'>
                 {gifGroup.map((gif) => {
                   if (!gif) {
                     return <Col sm>{' '}</Col>;

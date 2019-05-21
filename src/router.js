@@ -4,6 +4,7 @@ import {ConnectedRouter} from 'connected-react-router';
 
 //import app pages
 import App from './App';
+import SearchResults from './SearchResults';
 import NotFound from './NotFound';
 
 //define routes
@@ -11,6 +12,11 @@ const routes = [
   {
     path: '/home',
     component: App,
+    exact: true
+  },
+  {
+    path: '/search-results',
+    component: SearchResults,
     exact: true
   },
 ];

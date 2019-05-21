@@ -1,14 +1,14 @@
 import {SET_STATE} from './actions';
 
 const initialState = {
-  id: '',
-  name: '',
-  email: '',
-  authorized: false,
-  loading: false
+  loading: false,
+  searchOverlayOpen: false,
+  searchErrors: null,
+  keyword: '',
+  gifs: []
 }
 
-const userReducer = (state = initialState, action) => {
+const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_STATE:
       return {...state, ...action.payload}
@@ -17,4 +17,4 @@ const userReducer = (state = initialState, action) => {
   }
 }
 
-export default userReducer;
+export default searchReducer;

@@ -8,3 +8,11 @@ export const getTrendingGifs = () => {
     console.log(error);
   })
 }
+
+export const searchGifs = (keyword) => {
+  return axios.get(`${host}/api/v1/search`, { params: { q: keyword }})
+  .then((response) => response.data )
+  .catch(error => {
+    console.log(error);
+  })
+}
