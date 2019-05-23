@@ -19,7 +19,7 @@ class SearchForm extends React.Component {
   render(){
     const {form, handleSubmit} = this.props;
     return (
-      <Form onSubmit={handleSubmit(this.onSubmit)}>
+      <Form onSubmit={handleSubmit(this.onSubmit)} className='search-form'>
         <Form.Group controlId="keyword">
           <Field id='keyword'
                 name='keyword'
@@ -27,10 +27,10 @@ class SearchForm extends React.Component {
                 type='text'
                 placeholder='Type to search...'
                 className='form-control'
-                style={{height:'50px', border: 'none'}}
+                autocomplete='off'
               />
         </Form.Group>
-        <Button variant="primary" type="submit" disabled={false} style={{float: 'right'}}>
+        <Button variant="primary" type="submit" disabled={false} >
           Search Giphy
         </Button>
       </Form>

@@ -7,16 +7,12 @@ const LoginContents = (props) => {
   return (
     <div>
       <Modal.Header closeButton>
-        {/* <Modal.Title id="contained-modal-title-vcenter">
-          Welcome Back
-        </Modal.Title> */}
       </Modal.Header>
       <Modal.Body>
         <h4>Welcome Back</h4>
         <LoginForm changeModal={props.changeModal} />
       </Modal.Body>
-      <Modal.Footer>
-        {/* <Button onClick={props.onHide}>Close</Button> */}
+      <Modal.Footer >
       </Modal.Footer>
     </div>
   )

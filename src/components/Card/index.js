@@ -11,25 +11,25 @@ import PropTypes from 'prop-types';
 class GifCard extends React.Component {
   triggerOpenModal = () => {
     const {actions} = this.props;
-    actions.openModal();
+    actions.openModal('login');
   }
 
-  triggerAddToFavorites = (gif_id) => {
-    const {actions} = this.props;
+  triggerAddToFavorites = () => {
+    const {actions, gif_id} = this.props;
     actions.updateFavorites(gif_id);
   }
 
   render() {
     const {favorites, user , gifId, gif, still} = this.props
-    const buttonText = favorites && favorites.gifIds.includes(gifId) ? 'Favorited' : 'Add To Favorites';
+    const buttonText = favorites && favorites.gifIds && favorites.gifIds.includes(gifId) ? 'Favorited' : 'Add To Favorites';
     const buttonClass = buttonText === 'Favorited'  ? 'primary' : 'outline-primary';
     const handleOnClick = user && user.authorized ? this.triggerAddToFavorites : this.triggerOpenModal;
     return (
-      <Card className='shadow p-3 mb-5 bg-white rounded' style={{ width: '18rem', padding: '25px', marginBottom:'25px', border:'none' }}>
-        <GifPlayer variant="top" style={{height:'200px', width:'100%'}} autoplay={true} gif={gif} still={still} />
+      <Card className='shadow p-3 mb-5 bg-white rounded' >
+        <GifPlayer variant="top" autoplay={true} gif={gif} still={still} />
         <Card.Body>
-          <Button variant={buttonClass} style={{width: '100%', 'marginBottom': '10px'}} onClick={() => {handleOnClick(gifId)} } >{buttonText}</Button>
-          <Button variant="outline-secondary" style={{width: '100%'}} onClick={handleOnClick}>Add tags</Button>
+          <Button variant={buttonClass} onClick={handleOnClick} >{buttonText}</Button>
+          <Button variant="outline-secondary" onClick={handleOnClick}>Add tags</Button>
         </Card.Body>
       </Card>
     );

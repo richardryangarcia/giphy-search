@@ -64,21 +64,24 @@ class MenuBar extends React.Component {
   render() {
     const {user} = this.props;
     return (
-      <Navbar fixed="top" bg="dark" variant="dark" >
+      <Navbar collapseOnSelect fixed="top" expand="md" bg="dark" variant="dark">
         <Navbar.Brand href="/home">
-          <img
-            alt="project logo"
-            src={Logo}
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />
+            <img
+              alt="project logo"
+              src={Logo}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />
           {' Giphy Search'}
         </Navbar.Brand>
-        <Navbar.Collapse className="justify-content-end">
-          <Nav >
-            <Nav.Link key='search' href="#" onClick={this.openSearch}>Search</Nav.Link>
-            {this.authNavLinks().map(link => {
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+          </Nav>
+          <Nav>
+           <Nav.Link key='search' href="#" onClick={this.openSearch}>Search</Nav.Link>
+           {this.authNavLinks().map(link => {
               return link
             })}
           </Nav>

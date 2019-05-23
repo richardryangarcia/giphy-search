@@ -19,8 +19,8 @@ class LoginForm extends React.Component {
   render(){
     const {form, handleSubmit, changeModal} = this.props;
     return (
-      <Form onSubmit={handleSubmit(this.onSubmit)}>
-        <Form.Group controlId="email">
+      <Form onSubmit={handleSubmit(this.onSubmit)} >
+        <Form.Group controlId="email" >
           <Form.Label>Email address</Form.Label>
           <Field id='email'
                 name='email'
@@ -30,7 +30,7 @@ class LoginForm extends React.Component {
                 className='form-control'
               />
         </Form.Group>
-        <Form.Group controlId="password">
+        <Form.Group controlId="password" >
           <Form.Label>Password</Form.Label>
           <Field id='password'
                 name='password'
