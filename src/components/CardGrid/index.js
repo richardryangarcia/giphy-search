@@ -20,6 +20,15 @@ const groupBy = (colCount, array) => {
       }
     }
 
+    if (rowElements.length === 1) {
+      rowElements.push(null);
+      rowElements.push(null);
+    } else if (rowElements.length === 2){
+      rowElements.push(null);
+    }
+    
+    groupedElements.push(rowElements);
+
   return groupedElements
 }
 

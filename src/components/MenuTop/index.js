@@ -50,7 +50,7 @@ class MenuBar extends React.Component {
     const {user} = this.props;
     if (user.authorized){
       return [
-        <Nav.Link key='favorites' href="#">Favorites</Nav.Link>,
+        <Nav.Link key='favorites' href="#/favorites">Favorites</Nav.Link>,
         <Nav.Link key='logout' href="#" onClick={this.userLogout}>Logout</Nav.Link>
       ]
     } else {
@@ -65,7 +65,7 @@ class MenuBar extends React.Component {
     const {user} = this.props;
     return (
       <Navbar collapseOnSelect fixed="top" expand="md" bg="dark" variant="dark">
-        <Navbar.Brand href="/home">
+        <Navbar.Brand href="#/trending">
             <img
               alt="project logo"
               src={Logo}

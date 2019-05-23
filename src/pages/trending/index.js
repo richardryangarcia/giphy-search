@@ -1,14 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux'
-import {getTrending} from './redux/trending/actions';
-import {logout} from './redux/user/actions';
-import MenuTop from './components/MenuTop';
-import ModalContainer from './components/Modal';
-import CardGrid from './components/CardGrid';
-import SearchOverlay from './components/SearchOverlay';
+import {getTrending} from 'redux/trending/actions';
+import {logout} from 'redux/user/actions';
+import CardGrid from 'components/CardGrid';
 
-class App extends React.Component {
+class Trending extends React.Component {
   handleLogout = (e) => {
     e.preventDefault();
     const {actions} = this.props;
@@ -23,11 +20,8 @@ class App extends React.Component {
     const {trending} = this.props;
     const gifs = trending ? trending.gifs : [];
     return (
-      <div className="App" style={{'marginTop':'30px'}}>
-        {/* <MenuTop /> */}
+      <div style={{'marginTop':'30px'}}>
         <CardGrid gifs={gifs} headline={'Trending'} subHeadline={'Find out whats trending in the gif universe'} />
-        {/* <SearchOverlay/>
-        <ModalContainer/> */}
       </div>
     );
   }
@@ -41,4 +35,4 @@ const mapDispatchToProps = (dispatch) => {
   return { actions: bindActionCreators({ getTrending, logout}, dispatch) }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Trending);

@@ -3,20 +3,32 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import {ConnectedRouter} from 'connected-react-router';
 
 //import app pages
-import App from './App';
-import SearchResults from './SearchResults';
-import NotFound from './NotFound';
+import SearchResults from './pages/searchResults';
+import Favorites from './pages/favorites';
+import Trending from './pages/trending';
+import NotFound from './pages/NotFound';
+
+//always on page components
+import MenuTop from './components/MenuTop';
+import ModalContainer from './components/Modal';
+import SearchOverlay from './components/SearchOverlay';
+
 
 //define routes
 const routes = [
   {
-    path: '/home',
-    component: App,
+    path: '/trending',
+    component: Trending,
     exact: true
   },
   {
     path: '/search-results',
     component: SearchResults,
+    exact: true
+  },
+  {
+    path: '/favorites',
+    component: Favorites,
     exact: true
   },
 ];
@@ -26,8 +38,11 @@ class Router extends React.Component {
     const {history} = this.props;
     return (
       <ConnectedRouter history={history}>
+        <MenuTop />
+        <SearchOverlay />
+        <ModalContainer />
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/home" />}/>
+          <Route exact path="/" render={() => <Redirect to="/trending" />}/>
           {
             routes.map(route => (
               <Route

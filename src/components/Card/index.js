@@ -15,8 +15,8 @@ class GifCard extends React.Component {
   }
 
   triggerAddToFavorites = () => {
-    const {actions, gif_id} = this.props;
-    actions.updateFavorites(gif_id);
+    const {actions, gifId} = this.props;
+    actions.updateFavorites(gifId);
   }
 
   render() {

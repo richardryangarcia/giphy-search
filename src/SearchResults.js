@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {GET_TRENDING} from './redux/trending/actions';
-import {LOGOUT} from './redux/user/actions';
-import MenuTop from './components/MenuTop';
-import ModalContainer from './components/Modal';
-import CardGrid from './components/CardGrid';
-import SearchOverlay from './components/SearchOverlay';
+import {GET_TRENDING} from '/redux/trending/actions';
+import {LOGOUT} from '/redux/user/actions';
+import MenuTop from '/components/MenuTop';
+import ModalContainer from '/components/Modal';
+import CardGrid from '/components/CardGrid';
+import SearchOverlay from '/components/SearchOverlay';
 
 class SearchResults extends React.Component {
   render() {
