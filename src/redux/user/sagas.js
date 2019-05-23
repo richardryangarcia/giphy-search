@@ -1,6 +1,7 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
 import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE} from './actions';
 import {CLOSE_MODAL} from '../application/actions';
+import {GET_FAVORITES} from '../favorites/actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
 import {createMongoUser} from '../../services/authentication';
 
@@ -86,6 +87,7 @@ export function* loadCurrentUser(){
     const {uid, displayName, email} = response;
 
     window.localStorage.setItem('hebCodeChallenge.accessToken', response.ra)
+
     yield put({
       type: SET_STATE,
       payload: {
@@ -96,6 +98,8 @@ export function* loadCurrentUser(){
         loading: false
       }
     });
+
+    yield put({type: GET_FAVORITES});
   } else {
     yield put({
       type: LOGOUT

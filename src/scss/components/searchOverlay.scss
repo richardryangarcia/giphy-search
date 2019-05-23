@@ -9,7 +9,9 @@
   overflow: hidden;
   opacity: 0;
   height: 0vh;
-  transition: all 1s ease-in-out; }
-  .menu.open {
+  transition: all 1s ease-in-out;
+  &.open {
     opacity: .95;
-    height: 100vh; }
+    height: 100vh;
+  }
+}

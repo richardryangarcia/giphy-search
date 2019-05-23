@@ -16,3 +16,19 @@ export const searchGifs = (keyword) => {
     console.log(error);
   })
 }
+
+export const getFavoriteGifs = () => {
+  return axios.get(`${host}/api/v1/get-favorites`)
+  .then((response) => response.data )
+  .catch(error => {
+    console.log(error);
+  })
+}
+
+export const updateFavoritesGifs = (gif_id) => {
+  return axios.post(`${host}/api/v1/update-favorites`, { gif_id })
+  .then((response) => response.data )
+  .catch(error => {
+    console.log(error);
+  })
+}

@@ -50,13 +50,13 @@ class MenuBar extends React.Component {
     const {user} = this.props;
     if (user.authorized){
       return [
-        <Nav.Link href="#">Favorites</Nav.Link>,
-        <Nav.Link href="#" onClick={this.userLogout}>Logout</Nav.Link>
+        <Nav.Link key='favorites' href="#">Favorites</Nav.Link>,
+        <Nav.Link key='logout' href="#" onClick={this.userLogout}>Logout</Nav.Link>
       ]
     } else {
       return [
-          <Nav.Link href="#" onClick={this.openLoginModal}>Login</Nav.Link>,
-          <Nav.Link href="#" onClick={this.openRegisterModal}>Register</Nav.Link>
+          <Nav.Link key='login' href="#" onClick={this.openLoginModal}>Login</Nav.Link>,
+          <Nav.Link key='register' href="#" onClick={this.openRegisterModal}>Register</Nav.Link>
         ]
     }
   }
@@ -77,7 +77,7 @@ class MenuBar extends React.Component {
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Nav >
-            <Nav.Link href="#" onClick={this.openSearch}>Search</Nav.Link>
+            <Nav.Link key='search' href="#" onClick={this.openSearch}>Search</Nav.Link>
             {this.authNavLinks().map(link => {
               return link
             })}

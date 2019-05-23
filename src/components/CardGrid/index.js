@@ -43,9 +43,9 @@ const CardGrid = (props) => {
               <Row className='justify-content-center'>
                 {gifGroup.map((gif) => {
                   if (!gif) {
-                    return <Col sm>{' '}</Col>;
+                    return <Col key='empty' sm>{' '}</Col>;
                   } else {
-                    return <Col sm><GifCard still={gif.images.original_still} gif={`https://media.giphy.com/media/${gif.id}/giphy.gif`} /></Col>
+                    return <Col key={gif.id} sm><GifCard  still={`${gif.images.original_still}`} gifId={gif.id} gif={`https://media.giphy.com/media/${gif.id}/giphy.gif`} /></Col>
                   }
                 })}
               </Row>

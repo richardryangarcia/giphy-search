@@ -1,23 +1,23 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {GET_TRENDING} from './redux/trending/actions';
-import {LOGOUT} from './redux/user/actions';
+import { bindActionCreators } from 'redux'
+import {getTrending} from './redux/trending/actions';
+import {logout} from './redux/user/actions';
 import MenuTop from './components/MenuTop';
 import ModalContainer from './components/Modal';
 import CardGrid from './components/CardGrid';
 import SearchOverlay from './components/SearchOverlay';
 
 class App extends React.Component {
-
   handleLogout = (e) => {
     e.preventDefault();
-    const {dispatch} = this.props;
-    dispatch({type:LOGOUT});
+    const {actions} = this.props;
+    actions.logout();
   }
 
   componentDidMount(){
-    const {dispatch} = this.props;
-    dispatch({type:GET_TRENDING});
+    const {actions} = this.props;
+    actions.getTrending();
   }
   render() {
     const {trending} = this.props;
@@ -34,9 +34,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    trending: state.trending
-  }
+  return { trending: state.trending }
 }
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => {
+  return { actions: bindActionCreators({ getTrending, logout}, dispatch) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
