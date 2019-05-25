@@ -3,11 +3,12 @@ import {Field, reduxForm} from 'redux-form';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {LOGIN} from '../../redux/user/actions';
+import {bindActionCreators} from 'redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 class LoginForm extends React.Component {
-
   onSubmit = formProps => {
     const {dispatch, closeModal} = this.props;
     dispatch({
@@ -17,8 +18,12 @@ class LoginForm extends React.Component {
   }
 
   render(){
-    const {form, handleSubmit, changeModal} = this.props;
+    const {form, handleSubmit, changeModal, user} = this.props;
+    const loginSubmitErrors = user && user.loginSubmitErrors;
+    const alert = loginSubmitErrors ? <Alert key='danger' variant='danger'> {loginSubmitErrors} </Alert> : <div/>
     return (
+      <div>
+        {alert}
       <Form onSubmit={handleSubmit(this.onSubmit)} >
         <Form.Group controlId="email" >
           <Form.Label>Email address</Form.Label>
@@ -45,6 +50,7 @@ class LoginForm extends React.Component {
           Log in
         </Button>
       </Form>
+    </div>
     );
   }
 }
@@ -63,4 +69,10 @@ const validate = formProps => {
   return errors;
 }
 
-export default compose(connect(null, null), reduxForm({form:'loginForm', validate}))(LoginForm);
+const mapStateToProps = (state) => {
+  return ({
+    user: state.user
+  });
+}
+
+export default compose(connect(mapStateToProps, null), reduxForm({form:'loginForm', validate}))(LoginForm);

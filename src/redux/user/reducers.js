@@ -5,7 +5,9 @@ const initialState = {
   name: '',
   email: '',
   authorized: false,
-  loading: false
+  loading: false,
+  loginSubmitErrors: null,
+  registerSubmitErrors: null
 }
 
 const userReducer = (state = initialState, action) => {

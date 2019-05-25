@@ -1,8 +1,10 @@
 import {all, takeEvery, put} from 'redux-saga/effects';
 import {SET_STATE, OPEN_MODAL, CLOSE_MODAL, SET_MODAL_TYPE, APP_LOADING, APP_NOT_LOADING} from './actions';
+import {CLEAR_ERRORS} from 'redux/user/actions';
 
 export function* openModal({payload}){
   const {modalType} = payload;
+  yield put({type: CLEAR_ERRORS})
   yield put({
     type: SET_STATE,
     payload: {
@@ -24,6 +26,7 @@ export function* closeModal(){
 
 export function* setModalType({payload}){
   const {modalType} = payload;
+  yield put({type: CLEAR_ERRORS})
   yield put({
     type: SET_STATE,
     payload: {

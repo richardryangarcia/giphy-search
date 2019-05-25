@@ -1,5 +1,5 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
-import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE} from './actions';
+import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE, CLEAR_ERRORS} from './actions';
 import {CLOSE_MODAL} from '../application/actions';
 import {GET_FAVORITES} from '../favorites/actions';
 import {appLoading, appNotLoading} from '../application/actions';
@@ -8,6 +8,8 @@ import {createMongoUser} from '../../services/authentication';
 
 export function* login({payload}){
   const {email, password} = payload;
+  yield put({type: CLEAR_ERRORS});
+
   yield put({
     type: SET_STATE,
     payload: {
@@ -23,11 +25,19 @@ export function* login({payload}){
     yield put({
       type: CLOSE_MODAL
     });
+  } else {
+    yield put({
+      type: SET_STATE,
+      payload: {
+        loginSubmitErrors: 'Invalid user name / password'
+      }
+    })
   }
 }
 
 export function* register({payload}){
   const {firstName, lastName, email, password} = payload;
+  yield put({type: CLEAR_ERRORS});
   yield put({
     type: SET_STATE,
     payload: {
@@ -52,7 +62,15 @@ export function* register({payload}){
         type: CLOSE_MODAL
       });
     }
+  } else {
+    yield put({
+      type: SET_STATE,
+      payload: {
+        registerSubmitErrors: 'User creation failed. Please try again later.'
+      }
+    })
   }
+
 
   yield put({
     type: LOAD_CURRENT_USER,
@@ -113,12 +131,23 @@ export function* loadCurrentUser(){
 
 }
 
+export function* clearErrors() {
+  yield put({
+    type: SET_STATE,
+    payload: {
+      loginSubmitErrors: null,
+      registerSubmitErrors: null
+    }
+  });
+}
+
 export default function* rootSaga(){
   yield all([
     takeEvery(LOGIN, login ),
     takeEvery(REGISTER, register),
     takeEvery(LOGOUT, logout),
     takeEvery(LOAD_CURRENT_USER, loadCurrentUser),
+    takeEvery(CLEAR_ERRORS, clearErrors),
     loadCurrentUser()//run once on app load
   ])
 }

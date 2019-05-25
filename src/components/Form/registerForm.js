@@ -1,10 +1,12 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
+import {Field, reduxForm, getFormSyncErrors} from 'redux-form';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {REGISTER} from '../../redux/user/actions';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
+
 
 class RegisterForm extends React.Component {
 
@@ -17,8 +19,12 @@ class RegisterForm extends React.Component {
   }
 
   render(){
-    const {form, handleSubmit, changeModal} = this.props;
+    const {form, handleSubmit, changeModal, user} = this.props;
+    const registerSubmitErrors = user && user.registerSubmitErrors;
+    const alert = registerSubmitErrors ? <Alert key='danger' variant='danger'> {registerSubmitErrors} </Alert> : <div/>
     return (
+      <div>
+      {alert}
       <Form onSubmit={handleSubmit(this.onSubmit)}>
         <Form.Group controlId="firstName">
           <Form.Label>First name</Form.Label>
@@ -75,6 +81,7 @@ class RegisterForm extends React.Component {
           Sign Up
         </Button>
       </Form>
+      </div>
     );
   }
 }
@@ -105,4 +112,11 @@ const validate = formProps => {
   return errors;
 }
 
-export default compose(connect(null, null), reduxForm({form:'registerForm', validate}))(RegisterForm);
+const mapStateToProps = (state) => {
+  return ({
+    user: state.user
+  });
+}
+
+
+export default compose(connect(mapStateToProps, null), reduxForm({form:'registerForm', validate}))(RegisterForm);
