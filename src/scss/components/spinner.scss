@@ -1,0 +1,23 @@
+.spinner-overlay {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #ffffff;
+  overflow: hidden;
+  opacity: 0;
+  height: 0vh;
+  transition: all 0s ease-in-out;
+  &.open {
+    opacity: 1;
+    height: 100vh;
+  }
+}
+
+.center-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}

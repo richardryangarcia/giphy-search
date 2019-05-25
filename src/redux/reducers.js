@@ -6,6 +6,7 @@ import trendingReducer from './trending/reducers';
 import applicationReducer from './application/reducers';
 import searchReducer from './search/reducers';
 import favoritesReducer from './favorites/reducers';
+import tagsReducer from './tags/reducers';
 
 export default history =>
   combineReducers({
@@ -14,6 +15,7 @@ export default history =>
     form: formReducer,
     router: connectRouter(history),
     search: searchReducer,
+    tags: tagsReducer,
     trending: trendingReducer,
     user: userReducer
   })

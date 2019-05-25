@@ -12,6 +12,8 @@ import NotFound from './pages/NotFound';
 import MenuTop from './components/MenuTop';
 import ModalContainer from './components/Modal';
 import SearchOverlay from './components/SearchOverlay';
+import ToastMessage from 'components/Toast';
+import Spinner from 'components/Spinner';
 
 
 //define routes
@@ -41,6 +43,7 @@ class Router extends React.Component {
         <MenuTop />
         <SearchOverlay />
         <ModalContainer />
+        <Spinner />
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/trending" />}/>
           {

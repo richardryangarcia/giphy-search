@@ -1,34 +1,17 @@
-import axios from '../configs/axios';
-const host = process.env.REACT_APP_AXIOS_BASE_URL;
+import {getRequest as Get, postRequest as Post} from '../configs/axios';
 
-export const getTrendingGifs = () => {
-  return axios.get(`${host}/api/v1/trending`)
-  .then((response) => response.data )
-  .catch(error => {
-    console.log(error);
-  })
+export const getTrendingGifs = (params) => {
+  return Get('trending', params);
 }
 
-export const searchGifs = (keyword) => {
-  return axios.get(`${host}/api/v1/search`, { params: { q: keyword }})
-  .then((response) => response.data )
-  .catch(error => {
-    console.log(error);
-  })
+export const searchGifs = (params) => {
+  return Get('search', params);
 }
 
-export const getFavoriteGifs = () => {
-  return axios.get(`${host}/api/v1/get-favorites`)
-  .then((response) => response.data )
-  .catch(error => {
-    console.log(error);
-  })
+export const getFavoriteGifs = (params) => {
+  return Get('get-favorites', params);
 }
 
 export const updateFavoritesGifs = (gif_id) => {
-  return axios.post(`${host}/api/v1/update-favorites`, { gif_id })
-  .then((response) => response.data )
-  .catch(error => {
-    console.log(error);
-  })
+  return Post('update-favorites', {gif_id})
 }

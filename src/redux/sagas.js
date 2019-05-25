@@ -4,6 +4,7 @@ import trendingSagas from './trending/sagas';
 import applicationSagas from './application/sagas';
 import searchSagas from './search/sagas';
 import favoritesSagas from './favorites/sagas';
+import tagSagas from './tags/sagas';
 
 
 export default function* rootSaga(){
@@ -12,6 +13,7 @@ export default function* rootSaga(){
     trendingSagas(),
     applicationSagas(),
     searchSagas(),
-    favoritesSagas()
+    favoritesSagas(),
+    tagSagas()
   ])
 }

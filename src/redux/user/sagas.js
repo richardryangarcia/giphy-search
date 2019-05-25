@@ -2,6 +2,7 @@ import {all, takeEvery, put, call} from 'redux-saga/effects';
 import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE} from './actions';
 import {CLOSE_MODAL} from '../application/actions';
 import {GET_FAVORITES} from '../favorites/actions';
+import {appLoading, appNotLoading} from '../application/actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
 import {createMongoUser} from '../../services/authentication';
 
@@ -74,6 +75,8 @@ export function* logout(){
 }
 
 export function* loadCurrentUser(){
+  yield put(appLoading());
+
   window.localStorage.removeItem('hebCodeChallenge.accessToken');
   yield put({
     type: SET_STATE,
@@ -105,6 +108,9 @@ export function* loadCurrentUser(){
       type: LOGOUT
     });
   }
+
+  yield put(appNotLoading());
+
 }
 
 export default function* rootSaga(){

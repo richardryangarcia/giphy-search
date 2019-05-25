@@ -30,7 +30,7 @@ export function* submitSearch({payload}){
     }
   })
 
-  const response = yield call(searchGifs, keyword );
+  const response = yield call(searchGifs, {q: keyword} );
   const gifs = response && response.data ? response.data : [];
 
   yield put({

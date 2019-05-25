@@ -1,15 +1,11 @@
 import {SET_STATE} from './actions';
 
 const initialState = {
-  modalOpen: false,
-  modalType: '',
-  isMobile: false,
   loading: false,
-  toastOpen: false,
-  toastMessage: ''
+  gifs: []
 }
 
-const applicationReducer = (state = initialState, action) => {
+const tagsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_STATE:
       return {...state, ...action.payload}
@@ -18,4 +14,4 @@ const applicationReducer = (state = initialState, action) => {
   }
 }
 
-export default applicationReducer;
+export default tagsReducer;

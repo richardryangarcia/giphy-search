@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import GifPlayer from 'react-gif-player';
 import PropTypes from 'prop-types';
+import PopOverButton from 'components/PopOverButton';
 
 class GifCard extends React.Component {
   triggerOpenModal = () => {
@@ -19,19 +20,30 @@ class GifCard extends React.Component {
     actions.updateFavorites(gifId);
   }
 
+  renderTagButton = () => {
+    const {user, gifId} = this.props;
+    if (user && user.authorized) {
+      return <PopOverButton hasTags={false} gifId={gifId} title='Tags' buttonLabel='Add Tags'/>
+    } else {
+      return <Button variant="outline-secondary" onClick={this.triggerOpenModal}>Add tags</Button>
+    }
+  }
+
   render() {
     const {favorites, user , gifId, gif, still} = this.props
     const buttonText = favorites && favorites.gifIds && favorites.gifIds.includes(gifId) ? 'Favorited' : 'Add To Favorites';
     const buttonClass = buttonText === 'Favorited'  ? 'primary' : 'outline-primary';
     const handleOnClick = user && user.authorized ? this.triggerAddToFavorites : this.triggerOpenModal;
     return (
+      <div >
       <Card className='shadow p-3 mb-5 bg-white rounded' >
         <GifPlayer variant="top" autoplay={true} gif={gif} still={still} />
         <Card.Body>
           <Button variant={buttonClass} onClick={handleOnClick} >{buttonText}</Button>
-          <Button variant="outline-secondary" onClick={handleOnClick}>Add tags</Button>
+          {this.renderTagButton()}
         </Card.Body>
       </Card>
+    </div>
     );
   }
 }

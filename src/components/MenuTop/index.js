@@ -47,14 +47,22 @@ class MenuBar extends React.Component {
   }
 
   authNavLinks = () => {
-    const {user} = this.props;
+    const {user, application} = this.props;
+    const appLoading = application && application.loading ? true : false;
+
+    if (appLoading) {
+      return []
+    }
+
     if (user.authorized){
       return [
+        <Nav.Link key='search' href="#" onClick={this.openSearch}>Search</Nav.Link>,
         <Nav.Link key='favorites' href="#/favorites">Favorites</Nav.Link>,
         <Nav.Link key='logout' href="#" onClick={this.userLogout}>Logout</Nav.Link>
       ]
     } else {
       return [
+          <Nav.Link key='search' href="#" onClick={this.openSearch}>Search</Nav.Link>,
           <Nav.Link key='login' href="#" onClick={this.openLoginModal}>Login</Nav.Link>,
           <Nav.Link key='register' href="#" onClick={this.openRegisterModal}>Register</Nav.Link>
         ]
@@ -80,7 +88,6 @@ class MenuBar extends React.Component {
           <Nav className="mr-auto">
           </Nav>
           <Nav>
-           <Nav.Link key='search' href="#" onClick={this.openSearch}>Search</Nav.Link>
            {this.authNavLinks().map(link => {
               return link
             })}
@@ -93,6 +100,7 @@ class MenuBar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    application: state.application,
     user: state.user
   }
 }
