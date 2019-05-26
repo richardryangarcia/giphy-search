@@ -1,5 +1,5 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
-import {SET_STATE, UPDATE_TAGS, GET_TAGS} from './actions';
+import {SET_STATE, UPDATE_TAGS, GET_TAGS, CLEAR_TAGS} from './actions';
 import {updateTags as updateTagsRequest, getTags as getTagsRequest} from '../../services/tags';
 
 export function* updateTags({payload}){
@@ -48,9 +48,20 @@ export function* getTags(){
   }
 }
 
+export function* clearTags(){
+  yield put({
+    type: SET_STATE,
+    payload: {
+      loading: false,
+      gifs: []
+    }
+  })
+}
+
 export default function* rootSaga(){
   yield all([
     takeEvery(UPDATE_TAGS, updateTags ),
-    takeEvery(GET_TAGS, getTags)
+    takeEvery(GET_TAGS, getTags),
+    takeEvery(CLEAR_TAGS, clearTags)
   ])
 }

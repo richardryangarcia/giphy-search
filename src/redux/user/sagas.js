@@ -1,8 +1,8 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
 import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE, CLEAR_ERRORS} from './actions';
 import {CLOSE_MODAL} from '../application/actions';
-import {GET_FAVORITES} from '../favorites/actions';
-import {GET_TAGS} from '../tags/actions';
+import {GET_FAVORITES, CLEAR_FAVORITES} from '../favorites/actions';
+import {GET_TAGS, CLEAR_TAGS} from '../tags/actions';
 import {appLoading, appNotLoading} from '../application/actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
 import {createMongoUser} from '../../services/authentication';
@@ -102,6 +102,9 @@ export function* logout(){
       loading: false
     }
   })
+
+  yield put({type: CLEAR_FAVORITES});
+  yield put({type: CLEAR_TAGS});
   toaster.notify('Signed out ', {
     duration: 5000
   });
@@ -148,6 +151,9 @@ export function* loadCurrentUser(){
         loading: false
       }
     })
+
+    yield put({type: CLEAR_FAVORITES});
+    yield put({type: CLEAR_TAGS});
   }
 
   yield put(appNotLoading());

@@ -1,5 +1,5 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
-import {SET_STATE, GET_FAVORITES, UPDATE_FAVORITES} from './actions';
+import {SET_STATE, GET_FAVORITES, UPDATE_FAVORITES, CLEAR_FAVORITES} from './actions';
 import {getFavoriteGifs, updateFavoritesGifs} from '../../services/giphy';
 
 export function* getFavorites(){
@@ -44,9 +44,21 @@ export function* updateFavorites({payload}){
   })
 }
 
+export function* clearFavorites() {
+  yield put({
+    type: SET_STATE,
+    payload: {
+      loading: false,
+      gifIds: [],
+      gifs: []
+    }
+  })
+}
+
 export default function* rootSaga(){
   yield all([
     takeEvery(GET_FAVORITES, getFavorites ),
-    takeEvery(UPDATE_FAVORITES, updateFavorites)
+    takeEvery(UPDATE_FAVORITES, updateFavorites),
+    takeEvery(CLEAR_FAVORITES, clearFavorites)
   ])
 }
