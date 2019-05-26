@@ -7,13 +7,36 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import {groupBy} from 'utils/utils';
 import PropTypes from 'prop-types';
 
+const gifColumn = (gif) => {
+  if (!gif) return null;
+
+  return (
+    <div className='col-md-4' key={gif.id}>
+      <div className='gif-container'>
+        <GifCard  still={`${gif.images.original_still.url}`} gifId={gif.id} gif={`https://media.giphy.com/media/${gif.id}/giphy.gif`} />
+        {null}
+      </div>
+    </div>
+  )
+}
+
+const gifRow = (gifGroup) => {
+  const keyId = gifGroup && gifGroup[0] ? gifGroup[0].id : '';
+  return (
+    <Row key={keyId}>
+      {gifGroup.map((gif) => {
+        return gifColumn(gif);
+      })}
+    </Row>
+  )
+}
+
 const CardGrid = (props) => {
   const {gifs} = props;
   const groupedGifs = groupBy(3, gifs);
   return (
-    <div  >
-      <Container className='text-center'>
-        <Jumbotron>
+      <Container >
+        <Jumbotron >
           <h1>{props.headline}</h1>
           <p>
             {props.subHeadline}
@@ -22,25 +45,13 @@ const CardGrid = (props) => {
         <hr/>
 
         <div className='card-grid'>
-        {
-          groupedGifs.map((gifGroup) => {
-            const key_id = gifGroup && gifGroup[0] ? gifGroup[0].id : '';
-            return (
-              <Row key={key_id}>
-                {gifGroup.map((gif) => {
-                  if (!gif) {
-                    return <Col key='empty' sm>{' '}</Col>;
-                  } else {
-                    return <Col key={gif.id} ><GifCard  still={`${gif.images.original_still.url}`} gifId={gif.id} gif={`https://media.giphy.com/media/${gif.id}/giphy.gif`} /></Col>
-                  }
-                })}
-              </Row>
-            )
-          })
-        }
-      </div>
+          {
+            groupedGifs.map((gifGroup) => {
+              return gifRow(gifGroup)
+            })
+          }
+        </div>
       </Container>
-    </div>
   );
 }
 

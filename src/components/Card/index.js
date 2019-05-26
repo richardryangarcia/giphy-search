@@ -38,15 +38,13 @@ class GifCard extends React.Component {
     const buttonClass = buttonText === 'Favorited'  ? 'primary' : 'outline-primary';
     const handleOnClick = user && user.authorized ? this.triggerAddToFavorites : this.triggerOpenModal;
     return (
-      <div >
-      <Card className='shadow p-3 mb-5 bg-white rounded' >
+      <Card className='responsive-card' >
         <GifPlayer variant="top" autoplay={true} gif={gif} still={still} />
         <Card.Body>
-          <Button variant={buttonClass} onClick={handleOnClick} >{buttonText}</Button>
+          <Button variant={buttonClass} onClick={handleOnClick}>{buttonText}</Button>
           {this.renderTagButton()}
         </Card.Body>
       </Card>
-    </div>
     );
   }
 }

@@ -6,9 +6,8 @@ import {GET_TAGS, CLEAR_TAGS} from '../tags/actions';
 import {appLoading, appNotLoading} from '../application/actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
 import {createMongoUser} from '../../services/authentication';
+import {storeToken, removeToken} from 'utils/utils';
 import toaster from 'toasted-notes';
-
-const tokenItemName = process.env.REACT_APP_LOCAL_STORAGE_KEY;
 
 export function* login({payload}){
   const {email, password} = payload;
@@ -90,7 +89,7 @@ export function* register({payload}){
 
 export function* logout(){
   yield call(fbLogout)
-  window.localStorage.removeItem(tokenItemName);
+  removeToken();
 
   yield put({
     type: SET_STATE,
@@ -113,7 +112,7 @@ export function* logout(){
 export function* loadCurrentUser(){
   yield put(appLoading());
 
-  window.localStorage.removeItem(tokenItemName);
+  removeToken();
   yield put({
     type: SET_STATE,
     payload: {
@@ -125,7 +124,7 @@ export function* loadCurrentUser(){
   if (response && response.uid) {
     const {uid, displayName, email} = response;
 
-    window.localStorage.setItem(tokenItemName, response.ra)
+    storeToken(response.ra);
 
     yield put({
       type: SET_STATE,

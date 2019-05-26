@@ -1,3 +1,5 @@
+const authStorageSpace = process.env.REACT_APP_LOCAL_STORAGE_KEY;
+
 export const groupBy = (colCount, array) => {
     let groupedElements = [];
     let rowElements=[];
@@ -23,4 +25,16 @@ export const groupBy = (colCount, array) => {
     groupedElements.push(rowElements);
 
   return groupedElements
+}
+
+export const storeToken = (token) => {
+  window.localStorage.setItem(authStorageSpace, token);
+}
+
+export const removeToken = () => {
+  window.localStorage.removeItem(authStorageSpace);
+}
+
+export const getToken = () => {
+  return window.localStorage.getItem(authStorageSpace);
 }
