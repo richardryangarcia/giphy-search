@@ -20,18 +20,17 @@ const PopOverButton = (props) => {
             <Popover
               id='popover-positioned-top'
               title={title}
-              style={{paddingBottom: '10px'}}
             >
-              <div style={{marginBottom: '10px'}}>
+              <div className='badge-container'>
                 {tags.map((tag) => {
-                  return <Badge key={tag} variant="primary" style={{margin:'3px'}}>{tag}</Badge>
+                  return <Badge key={tag} variant="primary" >{tag}</Badge>
                 })}
               </div>
               <TagForm gifId={gifId}/>
             </Popover>
           }
         >
-          <Button variant={buttonClass} style={{width: '100%'}}>{buttonLabel}</Button>
+          <Button className='overlay-button' variant={buttonClass} >{buttonLabel}</Button>
         </OverlayTrigger>
 
   )

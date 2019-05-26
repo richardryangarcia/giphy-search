@@ -29,7 +29,7 @@ class TagForm extends React.Component {
                 autoComplete='off'
               />
         </Form.Group>
-        <Button variant="primary" type="submit" disabled={false} style={{float: 'right'}}>
+        <Button className='tag-save-button' variant="primary" type="submit" disabled={false}>
           Save
         </Button>
       </Form>

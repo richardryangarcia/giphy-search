@@ -40,7 +40,7 @@ class SearchForm extends React.Component {
         <Button variant="primary" type="submit" disabled={false} >
           Search Giphy
         </Button>
-        <Button variant="secondary" disabled={false} onClick={this.closeSearch} style={{marginRight: '10px'}}>
+        <Button className='cancel-search' variant="secondary" disabled={false} onClick={this.closeSearch}>
           Cancel
         </Button>
       </Form>

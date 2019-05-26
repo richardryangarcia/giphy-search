@@ -24,10 +24,9 @@ class GifCard extends React.Component {
     const {user, gifId, tags} = this.props;
     const taggedGifs = tags && tags.gifs ? tags.gifs : [];
     const tagLabels = taggedGifs && taggedGifs[gifId] ? taggedGifs[gifId] : [];
-    const hasTags = tagLabels ? true : false;
 
     if (user && user.authorized) {
-      return <PopOverButton hasTags={hasTags} gifId={gifId} tags={tagLabels} title='Tags' buttonLabel='Add Tags'/>
+      return <PopOverButton gifId={gifId} tags={tagLabels} title='Tags' buttonLabel='Add Tags'/>
     } else {
       return <Button variant="outline-secondary" onClick={this.triggerOpenModal}>Add tags</Button>
     }

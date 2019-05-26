@@ -6,6 +6,7 @@ import {GET_TAGS} from '../tags/actions';
 import {appLoading, appNotLoading} from '../application/actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
 import {createMongoUser} from '../../services/authentication';
+import toaster from 'toasted-notes';
 
 export function* login({payload}){
   const {email, password} = payload;
@@ -25,6 +26,9 @@ export function* login({payload}){
     });
     yield put({
       type: CLOSE_MODAL
+    });
+    toaster.notify('Sign in successful!', {
+      duration: 5000
     });
   } else {
     yield put({
@@ -62,6 +66,10 @@ export function* register({payload}){
       yield put({
         type: CLOSE_MODAL
       });
+
+      toaster.notify('Registration complete ', {
+        duration: 5000
+      });
     }
   } else {
     yield put({
@@ -91,6 +99,9 @@ export function* logout(){
       loading: false
     }
   })
+  toaster.notify('Signed out ', {
+    duration: 5000
+  });
 }
 
 export function* loadCurrentUser(){
@@ -125,8 +136,15 @@ export function* loadCurrentUser(){
     yield put({type: GET_TAGS});
   } else {
     yield put({
-      type: LOGOUT
-    });
+      type: SET_STATE,
+      payload: {
+        id: '',
+        name: '',
+        email: '',
+        authorized: false,
+        loading: false
+      }
+    })
   }
 
   yield put(appNotLoading());

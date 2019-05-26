@@ -13,7 +13,7 @@ class SearchOverlay extends React.Component {
     return (
       <div className={`menu ${menuClass}`}>
           {(searchOverlayOpen) ? (
-            <div style={{'padding':'70px 16px','zIndex':'1900', 'fontWeight':'100','color':'grey'}}>
+            <div className='search-contents'>
               <Container>
                 <Row>
                   <Col>

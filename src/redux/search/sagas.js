@@ -2,6 +2,8 @@ import {all, takeEvery, put, call} from 'redux-saga/effects';
 import { push } from 'react-router-redux'
 import {SET_STATE, SUBMIT_SEARCH, OPEN_SEARCH, CLOSE_SEARCH} from './actions';
 import {searchGifs} from '../../services/giphy';
+import toaster from 'toasted-notes';
+
 
 export function* openSearch(){
   yield put({
@@ -45,12 +47,9 @@ export function* submitSearch({payload}){
   if (gifs && gifs.length > 0 ){
     yield put(push('/search-results'))
   } else {
-    yield put({
-      type: SET_STATE,
-      payload: {
-        searchErrors: "Zero results for this search."
-      }
-    })
+    toaster.notify(`Zero results for keyword ${keyword}`, {
+      duration: 5000
+    });
   }
 
   yield put({
