@@ -58,8 +58,9 @@ const CardGrid = (props) => {
         <div style={{marginTop: '30px'}}>
         {
           groupedGifs.map((gifGroup) => {
+            const key_id = gifGroup && gifGroup[0] ? gifGroup[0].id : '';
             return (
-              <Row >
+              <Row key={key_id}>
                 {gifGroup.map((gif) => {
                   if (!gif) {
                     return <Col key='empty' sm>{' '}</Col>;

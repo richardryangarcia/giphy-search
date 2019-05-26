@@ -2,6 +2,7 @@ import {all, takeEvery, put, call} from 'redux-saga/effects';
 import {LOGIN, REGISTER, LOGOUT, LOAD_CURRENT_USER, SET_STATE, CLEAR_ERRORS} from './actions';
 import {CLOSE_MODAL} from '../application/actions';
 import {GET_FAVORITES} from '../favorites/actions';
+import {GET_TAGS} from '../tags/actions';
 import {appLoading, appNotLoading} from '../application/actions';
 import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../services/firebase';
 import {createMongoUser} from '../../services/authentication';
@@ -121,6 +122,7 @@ export function* loadCurrentUser(){
     });
 
     yield put({type: GET_FAVORITES});
+    yield put({type: GET_TAGS});
   } else {
     yield put({
       type: LOGOUT

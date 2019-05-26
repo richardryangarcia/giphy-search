@@ -2,7 +2,7 @@ import axios from 'axios';
 const host = process.env.REACT_APP_AXIOS_BASE_URL;
 
 axios.defaults.headers.common.Accept = 'application/json';
-axios.defaults.timeout = 1000;
+axios.defaults.timeout = 10000;
 
 export default axios;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm, getFormSyncErrors} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {REGISTER} from '../../redux/user/actions';
@@ -19,7 +19,7 @@ class RegisterForm extends React.Component {
   }
 
   render(){
-    const {form, handleSubmit, changeModal, user} = this.props;
+    const {handleSubmit, changeModal, user} = this.props;
     const registerSubmitErrors = user && user.registerSubmitErrors;
     const alert = registerSubmitErrors ? <Alert key='danger' variant='danger'> {registerSubmitErrors} </Alert> : <div/>
     return (

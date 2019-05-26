@@ -21,16 +21,20 @@ class GifCard extends React.Component {
   }
 
   renderTagButton = () => {
-    const {user, gifId} = this.props;
+    const {user, gifId, tags} = this.props;
+    const taggedGifs = tags && tags.gifs ? tags.gifs : [];
+    const tagLabels = taggedGifs && taggedGifs[gifId] ? taggedGifs[gifId] : [];
+    const hasTags = tagLabels ? true : false;
+
     if (user && user.authorized) {
-      return <PopOverButton hasTags={false} gifId={gifId} title='Tags' buttonLabel='Add Tags'/>
+      return <PopOverButton hasTags={hasTags} gifId={gifId} tags={tagLabels} title='Tags' buttonLabel='Add Tags'/>
     } else {
       return <Button variant="outline-secondary" onClick={this.triggerOpenModal}>Add tags</Button>
     }
   }
 
   render() {
-    const {favorites, user , gifId, gif, still} = this.props
+    const {favorites, user , gifId, gif, still} = this.props;
     const buttonText = favorites && favorites.gifIds && favorites.gifIds.includes(gifId) ? 'Favorited' : 'Add To Favorites';
     const buttonClass = buttonText === 'Favorited'  ? 'primary' : 'outline-primary';
     const handleOnClick = user && user.authorized ? this.triggerAddToFavorites : this.triggerOpenModal;
@@ -57,6 +61,7 @@ GifCard.propTypes = {
 const mapStateToProps = (state) => {
   return {
     favorites: state.favorites,
+    tags: state.tags,
     user: state.user
   }
 }

@@ -2,11 +2,18 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {SUBMIT_SEARCH} from '../../redux/search/actions';
+import {SUBMIT_SEARCH, CLOSE_SEARCH} from '../../redux/search/actions';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 class SearchForm extends React.Component {
+
+  closeSearch = () => {
+    const {dispatch} = this.props;
+    dispatch({
+      type: CLOSE_SEARCH
+    })
+  }
 
   onSubmit = formProps => {
     const {dispatch} = this.props;
@@ -17,7 +24,7 @@ class SearchForm extends React.Component {
   }
 
   render(){
-    const {form, handleSubmit} = this.props;
+    const {handleSubmit} = this.props;
     return (
       <Form onSubmit={handleSubmit(this.onSubmit)} className='search-form'>
         <Form.Group controlId="keyword">
@@ -32,6 +39,9 @@ class SearchForm extends React.Component {
         </Form.Group>
         <Button variant="primary" type="submit" disabled={false} >
           Search Giphy
+        </Button>
+        <Button variant="secondary" disabled={false} onClick={this.closeSearch} style={{marginRight: '10px'}}>
+          Cancel
         </Button>
       </Form>
     );

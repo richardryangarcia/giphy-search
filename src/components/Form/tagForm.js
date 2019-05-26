@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
+import {Field, reduxForm, reset} from 'redux-form';
 import {compose, bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Form from 'react-bootstrap/Form';
@@ -7,20 +7,16 @@ import Button from 'react-bootstrap/Button';
 import {updateTags} from 'redux/tags/actions';
 
 class TagForm extends React.Component {
-  componentDidMount () {
-    // console.log(this.props.gifId);
-    // console.log(this.props.tags.gifs[this.props.gifId]);
-    // this.props.initialize({ tags: this.props.tags });
-  }
 
   onSubmit = formProps => {
     const {tags} = formProps;
-    const {actions, gifId} = this.props;
+    const {actions, gifId, dispatch} = this.props;
     actions.updateTags(tags, gifId);
+    dispatch(reset('tagForm'));
   }
 
   render(){
-    const {form, handleSubmit, gifId } = this.props;
+    const {handleSubmit } = this.props;
     return (
       <Form onSubmit={handleSubmit(this.onSubmit)} >
         <Form.Group controlId="tags" >

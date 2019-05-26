@@ -70,7 +70,6 @@ class MenuBar extends React.Component {
   }
 
   render() {
-    const {user} = this.props;
     return (
       <Navbar collapseOnSelect fixed="top" expand="md" bg="dark" variant="dark">
         <Navbar.Brand href="#/trending">

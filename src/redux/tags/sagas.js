@@ -33,17 +33,16 @@ export function* getTags(){
   })
   const response = yield call(getTagsRequest);
   if (response) {
-    let s = [];
+    let gifs = {};
     response.tags.forEach((t) => {
-      s[t.gifId] = t.tags
+      gifs[t.gifId] = t.tags
     })
 
-    console.log(s);
     yield put({
       type: SET_STATE,
       payload: {
         loading: false,
-        gifs: s
+        gifs
       }
     })
   }

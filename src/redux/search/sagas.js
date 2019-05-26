@@ -1,6 +1,6 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
 import { push } from 'react-router-redux'
-import {SET_STATE, SUBMIT_SEARCH, SET_SEARCH_ERROR, OPEN_SEARCH, CLOSE_SEARCH} from './actions';
+import {SET_STATE, SUBMIT_SEARCH, OPEN_SEARCH, CLOSE_SEARCH} from './actions';
 import {searchGifs} from '../../services/giphy';
 
 export function* openSearch(){
@@ -44,9 +44,6 @@ export function* submitSearch({payload}){
 
   if (gifs && gifs.length > 0 ){
     yield put(push('/search-results'))
-    yield put({
-      type: CLOSE_SEARCH
-    });
   } else {
     yield put({
       type: SET_STATE,
@@ -55,6 +52,10 @@ export function* submitSearch({payload}){
       }
     })
   }
+
+  yield put({
+    type: CLOSE_SEARCH
+  });
 }
 
 

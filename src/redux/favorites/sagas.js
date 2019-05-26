@@ -1,6 +1,6 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
 import {SET_STATE, GET_FAVORITES, UPDATE_FAVORITES} from './actions';
-import {searchGifs, getFavoriteGifs, updateFavoritesGifs} from '../../services/giphy';
+import {getFavoriteGifs, updateFavoritesGifs} from '../../services/giphy';
 
 export function* getFavorites(){
   yield put({

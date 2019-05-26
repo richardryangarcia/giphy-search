@@ -3,14 +3,13 @@ import {Field, reduxForm} from 'redux-form';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {LOGIN} from '../../redux/user/actions';
-import {bindActionCreators} from 'redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
 class LoginForm extends React.Component {
   onSubmit = formProps => {
-    const {dispatch, closeModal} = this.props;
+    const {dispatch} = this.props;
     dispatch({
       type: LOGIN,
       payload: formProps
@@ -18,7 +17,7 @@ class LoginForm extends React.Component {
   }
 
   render(){
-    const {form, handleSubmit, changeModal, user} = this.props;
+    const {handleSubmit, changeModal, user} = this.props;
     const loginSubmitErrors = user && user.loginSubmitErrors;
     const alert = loginSubmitErrors ? <Alert key='danger' variant='danger'> {loginSubmitErrors} </Alert> : <div/>
     return (
