@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import {groupBy} from 'utils/utils';
+import PropTypes from 'prop-types';
 
 const CardGrid = (props) => {
   const {gifs} = props;
@@ -41,6 +42,10 @@ const CardGrid = (props) => {
       </Container>
     </div>
   );
+}
+
+CardGrid.propTypes = {
+  gifs: PropTypes.array,
 }
 
 export default CardGrid;

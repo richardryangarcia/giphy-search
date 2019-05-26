@@ -6,6 +6,7 @@ import {LOGIN} from '../../redux/user/actions';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component {
   onSubmit = formProps => {
@@ -66,6 +67,10 @@ const validate = formProps => {
   }
 
   return errors;
+}
+
+LoginForm.propTypes = {
+  changeModal: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

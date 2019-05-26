@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {updateTags} from 'redux/tags/actions';
+import PropTypes from 'prop-types';
 
 class TagForm extends React.Component {
 
@@ -45,6 +46,10 @@ const validate = formProps => {
   }
 
   return errors;
+}
+
+TagForm.propTypes = {
+  gifId: PropTypes.string
 }
 
 const mapStateToProps = (state) => {

@@ -34,7 +34,7 @@ class SearchForm extends React.Component {
                 type='text'
                 placeholder='Type to search...'
                 className='form-control'
-                autocomplete='off'
+                autoComplete='off'
               />
         </Form.Group>
         <Button variant="primary" type="submit" disabled={false} >
