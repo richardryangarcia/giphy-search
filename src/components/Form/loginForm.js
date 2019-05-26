@@ -44,7 +44,7 @@ class LoginForm extends React.Component {
                 className='form-control'
               />
         </Form.Group>
-        <p>Dont have an account?{' '}<button className='buttonless' onClick={changeModal}>Register</button></p>
+        <p>Dont have an account?{' '}<button type='button' className='buttonless' onClick={changeModal}>Register</button></p>
         <Button className='login-button' variant="primary" type="submit" disabled={false} >
           Log in
         </Button>

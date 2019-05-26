@@ -8,6 +8,8 @@ import {fbRegister, fbUpdateName, fbLogin, fbLogout, fbCurrentUser} from '../../
 import {createMongoUser} from '../../services/authentication';
 import toaster from 'toasted-notes';
 
+const tokenItemName = process.env.REACT_APP_LOCAL_STORAGE_KEY;
+
 export function* login({payload}){
   const {email, password} = payload;
   yield put({type: CLEAR_ERRORS});
@@ -88,7 +90,8 @@ export function* register({payload}){
 
 export function* logout(){
   yield call(fbLogout)
-  window.localStorage.removeItem('hebCodeChallenge.accessToken');
+  window.localStorage.removeItem(tokenItemName);
+
   yield put({
     type: SET_STATE,
     payload: {
@@ -107,7 +110,7 @@ export function* logout(){
 export function* loadCurrentUser(){
   yield put(appLoading());
 
-  window.localStorage.removeItem('hebCodeChallenge.accessToken');
+  window.localStorage.removeItem(tokenItemName);
   yield put({
     type: SET_STATE,
     payload: {
@@ -119,7 +122,7 @@ export function* loadCurrentUser(){
   if (response && response.uid) {
     const {uid, displayName, email} = response;
 
-    window.localStorage.setItem('hebCodeChallenge.accessToken', response.ra)
+    window.localStorage.setItem(tokenItemName, response.ra)
 
     yield put({
       type: SET_STATE,

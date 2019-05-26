@@ -1,5 +1,6 @@
 import axios from 'axios';
 const host = process.env.REACT_APP_AXIOS_BASE_URL;
+const tokenItemName = process.env.REACT_APP_LOCAL_STORAGE_KEY;
 
 axios.defaults.headers.common.Accept = 'application/json';
 axios.defaults.timeout = 10000;
@@ -7,7 +8,7 @@ axios.defaults.timeout = 10000;
 export default axios;
 
 export const postRequest = (endpoint, data) => {
-  const Authorization = window.localStorage.getItem('hebCodeChallenge.accessToken');
+  const Authorization = window.localStorage.getItem(tokenItemName);
 
   return axios.post(`${host}${endpoint}`, data, {headers: { Authorization }})
   .then((response) => response.data )
@@ -17,7 +18,8 @@ export const postRequest = (endpoint, data) => {
 }
 
 export const getRequest = (endpoint, params) => {
-  const Authorization = window.localStorage.getItem('hebCodeChallenge.accessToken');
+  const Authorization = window.localStorage.getItem(tokenItemName);
+
   const config = {
     headers: {Authorization},
     params

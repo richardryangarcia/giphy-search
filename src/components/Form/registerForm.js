@@ -76,7 +76,7 @@ class RegisterForm extends React.Component {
                 className='form-control'
               />
         </Form.Group>
-        <p>Already have an account?{' '}<button className='buttonless' onClick={changeModal}>Log in</button></p>
+        <p>Already have an account?{' '}<button type='button' className='buttonless' onClick={changeModal}>Log in</button></p>
         <Button variant="primary" type="submit" disabled={false} style={{float: 'right'}}>
           Sign Up
         </Button>
